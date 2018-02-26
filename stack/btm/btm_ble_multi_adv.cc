@@ -32,6 +32,7 @@
 #include "ble_advertiser.h"
 #include "ble_advertiser_hci_interface.h"
 #include "btm_int_types.h"
+#include "btm_int.h"
 
 using base::Bind;
 using base::TimeDelta;
@@ -202,7 +203,7 @@ class BleAdvertisingManagerImpl
     bda.address[5] = output.param_buf[0];
     bda.address[4] = output.param_buf[1];
     bda.address[3] = output.param_buf[2];
-
+    memcpy(&btm_cb.ble_ctr_cb.addr_mgnt_cb.private_addr,bda.address,6);
     cb.Run(bda);
   }
 
